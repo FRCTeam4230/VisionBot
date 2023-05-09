@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AimWithLimelight;
+import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class RobotContainer {
@@ -19,11 +20,16 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
+    configureDefaultCommands();
   }
-
 
   private void configureBindings() {
     new JoystickButton(controller, XboxController.Button.kA.value).whileTrue(aimWithLimelight);
+  }
+
+  private void configureDefaultCommands() {
+    driveTrain.setDefaultCommand(new DriveCommand(driveTrain, 
+    () -> controller.getLeftX(), () -> controller.getLeftY()));
   }
 
   public Command getAutonomousCommand() {

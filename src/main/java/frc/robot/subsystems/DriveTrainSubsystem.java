@@ -9,6 +9,7 @@ import frc.robot.Constants.DriveTrainSubsystemConstants;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -52,9 +53,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double forward, double rotation) {
-    differentialDrive.arcadeDrive(
-      forward * DriveTrainSubsystemConstants.SPEED_MULTIPLIER, 
-      rotation * DriveTrainSubsystemConstants.ROTATION_MULTIPLIER);
+    forward = forward * DriveTrainSubsystemConstants.SPEED_MULTIPLIER;
+    rotation = rotation * DriveTrainSubsystemConstants.ROTATION_MULTIPLIER;
+    forward = MathUtil.clamp(forward, -0.99, 0.99);
+    rotation = MathUtil.clamp(rotation, -0.99, 0.99);
+    differentialDrive.arcadeDrive(forward, rotation);
   }
 
   public void stop(){
@@ -63,6 +66,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void turn(double rotation) {
     arcadeDrive(0, rotation);
+  }
+
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
 
   @Override

@@ -1,30 +1,32 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Limelight;
 import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AimWithLimelight extends CommandBase {
-  DriveTrainSubsystem driveTrain;
-  double tx;
+  private DriveTrainSubsystem driveTrain;
+  private PIDController pidController;
+  
   public AimWithLimelight(DriveTrainSubsystem driveTrain) {
     this.driveTrain = driveTrain;
+    pidController = new PIDController(LimelightConstants.AIM_PROPORTIONAL, 0, LimelightConstants.AIM_DERIVATIVE);
 
     addRequirements(driveTrain);
   }
 
   @Override
   public void initialize() {
+    pidController.setSetpoint(0);
   }
 
   @Override
   public void execute() {
-    tx = Limelight.getInstance().getX();
+    double power = pidController.calculate(Limelight.getInstance().getX());
 
-    double power = tx * LimelightConstants.AIM_PROPORTIONAL;
-
-    driveTrain.turn(power);
+    driveTrain.arcadeDrive(-power, 0);
   }
 
   @Override
