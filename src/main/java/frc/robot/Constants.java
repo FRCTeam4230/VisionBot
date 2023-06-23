@@ -21,12 +21,12 @@ public final class Constants {
 
   public static class LimelightConstants {
 
-    public static final double AIM_PROPORTIONAL = 0.039;//Need to refine
+    public static final double AIM_PROPORTIONAL = 0.04;//Need to refine
     public static final double AIM_DERIVATIVE = 0;
 
-    public static final double RANGE_PROPORTIONAL = 0.02;
+    public static final double RANGE_PROPORTIONAL = 0.12;
     public static final double RANGE_DERIVATIVE = 0;
-    public static final double RANGE_SETPOINT = 0;
+    public static final double RANGE_SETPOINT = 6.0;
 
     public static final double CAMERA_ANGLE = 58.7;//Degrees
     public static final double TARGET_HEIGHT = 18.0;//Inches

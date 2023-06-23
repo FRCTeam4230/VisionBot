@@ -35,9 +35,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   
   public DriveTrainSubsystem() {
     backLeft = new WPI_TalonSRX(DriveTrainSubsystemConstants.BACK_LEFT_ID);
-    backLeft.setInverted(true);
+    backLeft.setInverted(false);
     frontLeft = new WPI_VictorSPX(DriveTrainSubsystemConstants.FRONT_LEFT_ID);
-    frontLeft.setInverted(true);
+    frontLeft.setInverted(false);
     
     frontRight = new WPI_TalonSRX(DriveTrainSubsystemConstants.FRONT_RIGHT_ID);
     frontRight.setInverted(true);
@@ -73,19 +73,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-      x = tx.getDouble(0.0);
-      y = ty.getDouble(0.0);
-      area = ta.getDouble(0.0);
-    }
+  public void periodic() {}
 
   @Override
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
-
-    builder.addDoubleProperty("LimelightX", () -> x, null);
-    builder.addDoubleProperty("LimelightY", () -> y, null);
-    builder.addDoubleProperty("LimelightArea", () -> area, null);
-
   }
   }

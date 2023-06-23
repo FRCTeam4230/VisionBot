@@ -10,11 +10,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AimWithLimelight;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.GetInRangeWithLimelight;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class RobotContainer {
   private DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   private AimWithLimelight aimWithLimelight = new AimWithLimelight(driveTrain);
+  private GetInRangeWithLimelight getInRangeWithLimelight = new GetInRangeWithLimelight(driveTrain);
 
   private XboxController controller = new XboxController(OperatorConstants.kDriverControllerPort);
 
@@ -25,6 +27,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     new JoystickButton(controller, XboxController.Button.kA.value).whileTrue(aimWithLimelight);
+    new JoystickButton(controller, XboxController.Button.kB.value).whileTrue(getInRangeWithLimelight);
   }
 
   private void configureDefaultCommands() {

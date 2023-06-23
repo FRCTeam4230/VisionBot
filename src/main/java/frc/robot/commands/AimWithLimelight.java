@@ -26,7 +26,7 @@ public class AimWithLimelight extends CommandBase {
   public void execute() {
     double power = pidController.calculate(Limelight.getInstance().getX());
 
-    driveTrain.arcadeDrive(-power, 0);
+    driveTrain.arcadeDrive(0, -power);
   }
 
   @Override
