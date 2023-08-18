@@ -53,8 +53,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double forward, double rotation) {
-    forward = forward * DriveTrainSubsystemConstants.SPEED_MULTIPLIER;
-    rotation = rotation * DriveTrainSubsystemConstants.ROTATION_MULTIPLIER;
     forward = MathUtil.clamp(forward, -0.99, 0.99);
     rotation = MathUtil.clamp(rotation, -0.99, 0.99);
     differentialDrive.arcadeDrive(forward, rotation);
